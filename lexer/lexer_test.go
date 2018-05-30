@@ -5,7 +5,7 @@ import (
 	"github.com/kenju/go-monkey/token"
 )
 
-func TextNextToken(t *testing.T) {
+func TestNextToken(t *testing.T) {
 	input := `let five = 5;
 	let ten = 10;
 
