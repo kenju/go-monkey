@@ -1,10 +1,11 @@
 package main
 
 import (
-	"os/user"
 	"fmt"
-	"github.com/kenju/go-monkey/repl"
 	"os"
+	"os/user"
+
+	"github.com/kenju/go-monkey/repl"
 )
 
 func main() {
