@@ -4,10 +4,13 @@ import (
 	"github.com/kenju/go-monkey/lexer"
 	"github.com/kenju/go-monkey/token"
 	"github.com/kenju/go-monkey/ast"
+	"fmt"
 )
 
 type Parser struct {
 	l *lexer.Lexer
+
+	errors []string
 
 	curToken token.Token
 	peekToken token.Token
@@ -16,12 +19,22 @@ type Parser struct {
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{
 		l: l,
+		errors: []string{ },
 	}
 	// Read two tokens, so curToken and peekToken are both set
 	p.nextToken();
 	p.nextToken();
 
 	return p
+}
+
+func (p *Parser) Errors() []string {
+	return p.errors
+}
+
+func (p *Parser) peekError(t token.TokenType) {
+	msg := fmt.Sprintf("expected next token to be %s, got %s instead", t, p.peekToken.Type)
+	p.errors = append(p.errors, msg)
 }
 
 func (p *Parser) nextToken() {

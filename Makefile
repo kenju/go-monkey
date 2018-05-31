@@ -24,7 +24,7 @@ update:
 
 ## Run tests
 test: setup
-	echo "Not implemented yet"
+	go test -v ./...
 
 ## Lint
 lint: setup
