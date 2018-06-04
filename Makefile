@@ -35,7 +35,11 @@ lint: setup
 
 ## Format source codes
 fmt: setup
-	goimports -w main.go
+	packages=("ast" "lexer")
+	for pkg in $$packages; do \
+		echo "goimports -w $$pkg"; \
+		goimports -w $$pkg; \
+	done
 
 ## Build binaries
 build:
