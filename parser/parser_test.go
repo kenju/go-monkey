@@ -1,10 +1,11 @@
 package parser
 
 import (
-	"testing"
-	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/ast"
 	"fmt"
+	"testing"
+
+	"github.com/kenju/go-monkey/ast"
+	"github.com/kenju/go-monkey/lexer"
 )
 
 func TestLetStatements(t *testing.T) {
@@ -30,9 +31,9 @@ let foobar = 838383;
 	tests := []struct {
 		expectedIdentifier string
 	}{
-		{ "x" },
-		{ "y" },
-		{ "foobar" },
+		{"x"},
+		{"y"},
+		{"foobar"},
 	}
 
 	for i, tt := range tests {
@@ -173,12 +174,12 @@ func TestIntegerLiteralExpression(t *testing.T) {
 
 func TestParsingPrefixExpressions(t *testing.T) {
 	prefixTests := []struct {
-		input string
-		operator string
+		input        string
+		operator     string
 		integerValue int64
 	}{
-		{ "!5;", "!", 5 },
-		{ "-15;", "-", 15 },
+		{"!5;", "!", 5},
+		{"-15;", "-", 15},
 	}
 
 	for _, tt := range prefixTests {

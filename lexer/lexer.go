@@ -3,10 +3,10 @@ package lexer
 import "github.com/kenju/go-monkey/token"
 
 type Lexer struct {
-	input string
-	position int // current position in input
-	readPosition int // current reading position in input
-	ch byte // current char under examination
+	input        string
+	position     int  // current position in input
+	readPosition int  // current reading position in input
+	ch           byte // current char under examination
 }
 
 func New(input string) *Lexer {
@@ -28,7 +28,7 @@ func (l *Lexer) NextToken() token.Token {
 			ch := l.ch
 			l.readChar()
 			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.EQ, Literal: literal};
+			tok = token.Token{Type: token.EQ, Literal: literal}
 		} else {
 			tok = newToken(token.ASSIGN, l.ch)
 		}
@@ -41,7 +41,7 @@ func (l *Lexer) NextToken() token.Token {
 			ch := l.ch
 			l.readChar()
 			literal := string(ch) + string(l.ch)
-			tok = token.Token{Type: token.NOT_EQ, Literal: literal};
+			tok = token.Token{Type: token.NOT_EQ, Literal: literal}
 		} else {
 			tok = newToken(token.BANG, l.ch)
 		}
@@ -97,7 +97,7 @@ func (l *Lexer) readIdentifier() string {
 func (l *Lexer) readNumber() string {
 	position := l.position
 	for isDigit(l.ch) {
-		 l.readChar()
+		l.readChar()
 	}
 	return l.input[position:l.position]
 }
@@ -117,7 +117,7 @@ func (l *Lexer) readChar() {
 		l.ch = l.input[l.readPosition]
 	}
 	l.position = l.readPosition // set position
-	l.readPosition += 1 // advance to the next char
+	l.readPosition += 1         // advance to the next char
 }
 
 // readChar without moving pointers. just peek the char.
@@ -139,8 +139,7 @@ func isDigit(ch byte) bool {
 
 func newToken(tokenType token.TokenType, ch byte) token.Token {
 	return token.Token{
-		Type: tokenType,
+		Type:    tokenType,
 		Literal: string(ch),
 	}
 }
-

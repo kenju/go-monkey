@@ -1,27 +1,28 @@
 package parser
 
 import (
-	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/token"
-	"github.com/kenju/go-monkey/ast"
 	"fmt"
 	"strconv"
+
+	"github.com/kenju/go-monkey/ast"
+	"github.com/kenju/go-monkey/lexer"
+	"github.com/kenju/go-monkey/token"
 )
 
 const (
 	_ int = iota // iota to give the following constants incrementing numbers as value
 	LOWEST
-	EQUALS // ==
+	EQUALS      // ==
 	LESSGREATER // > or <
-	SUM // +
-	PRODUCT // *
-	PREFIX // -x or !x
-	CALL // myFunction(x)
+	SUM         // +
+	PRODUCT     // *
+	PREFIX      // -x or !x
+	CALL        // myFunction(x)
 )
 
 type (
 	prefixParseFn func() ast.Expression
-	infixParseFn func(ast.Expression) ast.Expression
+	infixParseFn  func(ast.Expression) ast.Expression
 )
 
 type Parser struct {
@@ -29,23 +30,23 @@ type Parser struct {
 
 	errors []string
 
-	curToken token.Token
+	curToken  token.Token
 	peekToken token.Token
 
 	// maps for checking if the appropriate map has
 	// a parsing function associated with curToken.Type.
 	prefixParseFns map[token.TokenType]prefixParseFn
-	infixParseFns map[token.TokenType]infixParseFn
+	infixParseFns  map[token.TokenType]infixParseFn
 }
 
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{
-		l: l,
-		errors: []string{ },
+		l:      l,
+		errors: []string{},
 	}
 	// Read two tokens, so curToken and peekToken are both set
-	p.nextToken();
-	p.nextToken();
+	p.nextToken()
+	p.nextToken()
 
 	// initialize the prefixParseFns map on Parser
 	// and register a parsing function
@@ -76,8 +77,8 @@ func (p *Parser) nextToken() {
 
 func (p *Parser) ParseProgram() *ast.Program {
 	// construct the root node of the AST
-	program := &ast.Program{ }
-	program.Statements = []ast.Statement{ }
+	program := &ast.Program{}
+	program.Statements = []ast.Statement{}
 
 	// iterates over every token until EOF
 	for p.curToken.Type != token.EOF {
@@ -172,7 +173,7 @@ func (p *Parser) parseIdentifier() ast.Expression {
 }
 
 func (p *Parser) parseIntegerLiteral() ast.Expression {
-	lit := &ast.IntegerLiteral{ Token: p.curToken }
+	lit := &ast.IntegerLiteral{Token: p.curToken}
 	value, err := strconv.ParseInt(p.curToken.Literal, 0, 64)
 	if err != nil {
 		msg := fmt.Sprintf("could not parse %q as integer", p.curToken.Literal)
@@ -188,7 +189,7 @@ func (p *Parser) parseIntegerLiteral() ast.Expression {
 func (p *Parser) parsePrefixExpression() ast.Expression {
 	// use current token which is one of "!" or "-"
 	expression := &ast.PrefixExpression{
-		Token: p.curToken,
+		Token:    p.curToken,
 		Operator: p.curToken.Literal,
 	}
 

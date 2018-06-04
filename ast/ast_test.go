@@ -2,6 +2,7 @@ package ast
 
 import (
 	"testing"
+
 	"github.com/kenju/go-monkey/token"
 )
 
@@ -10,18 +11,18 @@ func TestString(t *testing.T) {
 		Statements: []Statement{
 			&LetStatement{
 				Token: token.Token{
-					Type: token.LET,
+					Type:    token.LET,
 					Literal: "let",
 				},
 				Name: &Identifier{
 					Token: token.Token{
-						Type: token.IDENT,
+						Type:    token.IDENT,
 						Literal: "myVar",
 					},
 				},
 				Value: &Identifier{
 					Token: token.Token{
-						Type: token.IDENT,
+						Type:    token.IDENT,
 						Literal: "anotherVar",
 					},
 				},
