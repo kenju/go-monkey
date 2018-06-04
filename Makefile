@@ -4,6 +4,8 @@ REVISION := $(shell git rev-parse --short HEAD)
 LDFLAGS := -X 'main.version=$(VERSION)' \
 	-X 'main.revision=$(REVISION)'
 
+packages := ast lexer main.go parser repl token
+
 ## Build binaries and run
 run: build
 	./go-monkey
@@ -35,9 +37,7 @@ lint: setup
 
 ## Format source codes
 fmt: setup
-	packages=("ast" "lexer")
-	for pkg in $$packages; do \
-		echo "goimports -w $$pkg"; \
+	for pkg in $(packages); do \
 		goimports -w $$pkg; \
 	done
 
