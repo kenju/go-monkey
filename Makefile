@@ -36,7 +36,7 @@ lint: setup
 	done
 
 ## Format source codes
-fmt: setup
+fmt:
 	for pkg in $(packages); do \
 		goimports -w $$pkg; \
 	done
