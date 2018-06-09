@@ -3,6 +3,7 @@ package parser
 import (
 	"fmt"
 	"testing"
+
 	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/lexer"
 )

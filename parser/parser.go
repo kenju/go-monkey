@@ -313,7 +313,7 @@ func (p *Parser) parseIfExpression() ast.Expression {
 		if !p.expectPeek(token.LBRACE) {
 			return nil
 		}
-		
+
 		expression.Alternative = p.parseBlockStatement()
 	}
 
@@ -340,7 +340,7 @@ func (p *Parser) parseFunctionLiteral() ast.Expression {
 
 func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {
 	exp := &ast.CallExpression{
-		Token: p.curToken,
+		Token:    p.curToken,
 		Function: function,
 	}
 
@@ -350,7 +350,7 @@ func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {
 }
 
 func (p *Parser) parseCallArguments() []ast.Expression {
-	args := []ast.Expression{ }
+	args := []ast.Expression{}
 
 	if p.peekTokenIs(token.RPAREN) {
 		p.nextToken()
@@ -374,7 +374,7 @@ func (p *Parser) parseCallArguments() []ast.Expression {
 }
 
 func (p *Parser) parseFunctionParameters() []*ast.Identifier {
-	identifiers := []*ast.Identifier{ }
+	identifiers := []*ast.Identifier{}
 
 	if p.peekTokenIs(token.RPAREN) {
 		p.nextToken()

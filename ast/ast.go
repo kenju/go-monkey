@@ -3,8 +3,9 @@ package ast
 import (
 	"bytes"
 
-	"github.com/kenju/go-monkey/token"
 	"strings"
+
+	"github.com/kenju/go-monkey/token"
 )
 
 type Node interface {
@@ -181,7 +182,8 @@ type Boolean struct {
 	Token token.Token
 	Value bool
 }
-func (b *Boolean) expressionNode() { }
+
+func (b *Boolean) expressionNode() {}
 func (b *Boolean) TokenLiteral() string {
 	return b.Token.Literal
 }
@@ -190,13 +192,13 @@ func (b *Boolean) String() string {
 }
 
 type IfExpression struct {
-	Token token.Token
-	Condition Expression
+	Token       token.Token
+	Condition   Expression
 	Consequence *BlockStatement
 	Alternative *BlockStatement
 }
 
-func (ie *IfExpression) expressionNode() { }
+func (ie *IfExpression) expressionNode() {}
 func (ie *IfExpression) TokenLiteral() string {
 	return ie.Token.Literal
 }
@@ -217,11 +219,11 @@ func (ie *IfExpression) String() string {
 }
 
 type BlockStatement struct {
-	Token token.Token // the { token
+	Token      token.Token // the { token
 	Statements []Statement
 }
 
-func (bs *BlockStatement) statementNode() { }
+func (bs *BlockStatement) statementNode() {}
 func (bs *BlockStatement) TokenLiteral() string {
 	return bs.Token.Literal
 }
@@ -234,19 +236,19 @@ func (bs *BlockStatement) String() string {
 }
 
 type FunctionLiteral struct {
-	Token token.Token
+	Token      token.Token
 	Parameters []*Identifier
-	Body *BlockStatement
+	Body       *BlockStatement
 }
 
-func (fl *FunctionLiteral) expressionNode() { }
+func (fl *FunctionLiteral) expressionNode() {}
 func (fl *FunctionLiteral) TokenLiteral() string {
 	return fl.Token.Literal
 }
 func (fl *FunctionLiteral) String() string {
 	var out bytes.Buffer
 
-	params := []string{ }
+	params := []string{}
 
 	for _, p := range fl.Parameters {
 		params = append(params, p.String())
@@ -258,17 +260,16 @@ func (fl *FunctionLiteral) String() string {
 	out.WriteString(") ")
 	out.WriteString(fl.Body.String())
 
-
 	return out.String()
 }
 
 type CallExpression struct {
-	Token token.Token // The '(' token
-	Function Expression
+	Token     token.Token // The '(' token
+	Function  Expression
 	Arguments []Expression
 }
 
-func (ce *CallExpression) expressionNode() { }
+func (ce *CallExpression) expressionNode() {}
 func (ce *CallExpression) TokenLiteral() string {
 	return ce.Token.Literal
 }
