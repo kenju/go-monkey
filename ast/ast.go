@@ -8,24 +8,26 @@ import (
 	"github.com/kenju/go-monkey/token"
 )
 
+// The base Node interface
 type Node interface {
 	TokenLiteral() string
-	// String() will allow us to print AST nodes for debugging
-	// and to compare with other nodes.
 	String() string
 }
 
+// All statement nodes
 type Statement interface {
 	Node
 	statementNode()
 }
 
+// All expression nodes
 type Expression interface {
 	Node
 	expressionNode()
 }
 
 // Program node is the root node of every AST parser produces.
+// implements Node
 type Program struct {
 	Statements []Statement
 }
@@ -45,6 +47,8 @@ func (p *Program) String() string {
 	}
 	return out.String()
 }
+
+// Statements
 
 type LetStatement struct {
 	Token token.Token // the token.LET token
@@ -71,24 +75,10 @@ func (ls *LetStatement) String() string {
 	return out.String()
 }
 
-type Identifier struct {
-	Token token.Token // the token.IDENT token
-	Value string
-}
-
-func (i *Identifier) expressionNode() {}
-func (i *Identifier) TokenLiteral() string {
-	return i.Token.Literal
-}
-func (i *Identifier) String() string {
-	return i.Value
-}
-
 type ReturnStatement struct {
 	Token       token.Token // the 'return' token
 	ReturnValue Expression
 }
-
 func (rs *ReturnStatement) statementNode() {}
 func (rs *ReturnStatement) TokenLiteral() string {
 	return rs.Token.Literal
@@ -122,6 +112,37 @@ func (es *ExpressionStatement) String() string {
 		return es.Expression.String()
 	}
 	return ""
+}
+
+type BlockStatement struct {
+	Token      token.Token // the { token
+	Statements []Statement
+}
+
+func (bs *BlockStatement) statementNode() {}
+func (bs *BlockStatement) TokenLiteral() string {
+	return bs.Token.Literal
+}
+func (bs *BlockStatement) String() string {
+	var out bytes.Buffer
+	for _, s := range bs.Statements {
+		out.WriteString(s.String())
+	}
+	return out.String()
+}
+
+// Expressions
+
+type Identifier struct {
+	Token token.Token // the token.IDENT token
+	Value string
+}
+func (i *Identifier) expressionNode() {}
+func (i *Identifier) TokenLiteral() string {
+	return i.Token.Literal
+}
+func (i *Identifier) String() string {
+	return i.Value
 }
 
 type IntegerLiteral struct {
@@ -215,23 +236,6 @@ func (ie *IfExpression) String() string {
 		out.WriteString(ie.Alternative.String())
 	}
 
-	return out.String()
-}
-
-type BlockStatement struct {
-	Token      token.Token // the { token
-	Statements []Statement
-}
-
-func (bs *BlockStatement) statementNode() {}
-func (bs *BlockStatement) TokenLiteral() string {
-	return bs.Token.Literal
-}
-func (bs *BlockStatement) String() string {
-	var out bytes.Buffer
-	for _, s := range bs.Statements {
-		out.WriteString(s.String())
-	}
 	return out.String()
 }
 
