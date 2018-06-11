@@ -7,8 +7,8 @@ import (
 
 	"github.com/kenju/go-monkey/evaluator"
 	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/parser"
 	"github.com/kenju/go-monkey/object"
+	"github.com/kenju/go-monkey/parser"
 )
 
 const PROMPT = ">> "

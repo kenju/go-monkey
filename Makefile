@@ -28,6 +28,10 @@ update:
 test:
 	go test -v ./...
 
+## Run tests (without verbose)
+t:
+	go test ./...
+
 ## Lint
 lint: setup
 	go vet $$(go list)
