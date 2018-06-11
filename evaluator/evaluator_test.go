@@ -13,12 +13,10 @@ func TestEvalIntegerExpression(t *testing.T) {
 		input    string
 		expected int64
 	}{
-		{
-			"5", 5,
-		},
-		{
-			"10", 10,
-		},
+		{ "5", 5, },
+		{ "10", 10, },
+		{ "-5", -5, },
+		{ "-10", -10, },
 	}
 
 	for _, tt := range tests {
