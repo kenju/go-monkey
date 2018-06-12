@@ -115,8 +115,8 @@ func TestNextToken(t *testing.T) {
 		{token.INT, "9"},
 		{token.SEMICOLON, ";"},
 
-		{ token.STRING, "foobar" },
-		{ token.STRING, "foo bar" },
+		{token.STRING, "foobar"},
+		{token.STRING, "foo bar"},
 
 		{token.EOF, ""},
 	}

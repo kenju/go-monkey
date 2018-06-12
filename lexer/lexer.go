@@ -123,7 +123,7 @@ func (l *Lexer) readChar() {
 	l.readPosition += 1         // advance to the next char
 }
 
-func (l  *Lexer) readString() string {
+func (l *Lexer) readString() string {
 	position := l.position + 1
 	for {
 		l.readChar()

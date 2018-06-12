@@ -95,7 +95,7 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		return applyFunction(function, args)
 
 	case *ast.StringLiteral:
-		return &object.String{ Value: node.Value }
+		return &object.String{Value: node.Value}
 	}
 
 	return nil
@@ -238,12 +238,12 @@ func evalIntegerInfixExpression(operator string, left, right object.Object) obje
 
 func evalStringInfixExpression(operator string, left, right object.Object) object.Object {
 	if operator != "+" {
-		return newError("unknown operator: %s %s %s", left.Type(), operator,right.Type())
+		return newError("unknown operator: %s %s %s", left.Type(), operator, right.Type())
 	}
 
 	leftVal := left.(*object.String).Value
 	rightVal := right.(*object.String).Value
-	return &object.String{ Value: leftVal + rightVal }
+	return &object.String{Value: leftVal + rightVal}
 }
 
 func evalIfExpression(ie *ast.IfExpression, env *object.Environment) object.Object {
