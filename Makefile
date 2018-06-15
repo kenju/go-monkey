@@ -16,16 +16,8 @@ setup:
 	go get golang.org/x/tools/cmd/goimports
 	go get github.com/Songmu/make2help/cmd/make2help
 
-## Install dependencies
-deps:
-	echo "Not implemented yet"
-
-## Update dependencies
-update:
-	echo "Not implemented yet"
-
 ## Run tests
-test:
+test: setup
 	go test -v ./...
 
 ## Run tests (without verbose)
@@ -34,8 +26,8 @@ t:
 
 ## Lint
 lint: setup
-	go vet $$(go list)
-	for pkg in $$(go list); do \
+	go vet $(go list)
+	for pkg in $(go list); do \
 		golint -set_exit_status $$pkg || exit $$?; \
 	done
 
