@@ -120,12 +120,12 @@ func TestNextToken(t *testing.T) {
 		{token.STRING, "foo bar"},
 
 		// [1, 2];
-		{ token.LBRACKET, "[" },
-		{ token.INT, "1" },
-		{ token.COMMA, "," },
-		{ token.INT, "2" },
-		{ token.RBRACKET, "]" },
-		{ token.SEMICOLON, ";" },
+		{token.LBRACKET, "["},
+		{token.INT, "1"},
+		{token.COMMA, ","},
+		{token.INT, "2"},
+		{token.RBRACKET, "]"},
+		{token.SEMICOLON, ";"},
 
 		{token.EOF, ""},
 	}
