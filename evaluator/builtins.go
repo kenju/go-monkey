@@ -52,7 +52,7 @@ var builtins = map[string]*object.Builtin{
 				return arr.Elements[length-1]
 			}
 
-			return  NULL
+			return NULL
 		},
 	},
 	"rest": {
@@ -70,7 +70,7 @@ var builtins = map[string]*object.Builtin{
 				return arr.Elements[length-1]
 			}
 
-			return  NULL
+			return NULL
 		},
 	},
 	"push": {
@@ -89,7 +89,7 @@ var builtins = map[string]*object.Builtin{
 			copy(newElements, arr.Elements)
 			newElements[length] = args[1]
 
-			return  &object.Array{ Elements: newElements }
+			return &object.Array{Elements: newElements}
 		},
 	},
 }
