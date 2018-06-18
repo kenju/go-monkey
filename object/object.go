@@ -166,7 +166,7 @@ type HashKey struct {
 	Value uint64
 }
 
-func (b *Boolean) HashKeys() HashKey {
+func (b *Boolean) HashKey() HashKey {
 	var value uint64
 
 	if b.Value {
@@ -215,4 +215,8 @@ func (h *Hash) Inspect() string {
 	out.WriteString("}")
 
 	return out.String()
+}
+
+type Hashable interface {
+	HashKey() HashKey
 }
