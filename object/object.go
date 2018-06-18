@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/kenju/go-monkey/ast"
 	"hash/fnv"
+
+	"github.com/kenju/go-monkey/ast"
 )
 
 func NewEnclosedEnvironment(outer *Environment) *Environment {
@@ -50,7 +51,7 @@ const (
 	STRING_OBJ       = "STRING"
 	BUILTIN_OBJ      = "BUILTIN"
 	ARRAY_OBJ        = "ARRAY"
-	HASH_OBJ = "HASH"
+	HASH_OBJ         = "HASH"
 )
 
 type Object interface {
@@ -161,7 +162,7 @@ func (ao *Array) Inspect() string {
 }
 
 type HashKey struct {
-	Type ObjectType
+	Type  ObjectType
 	Value uint64
 }
 
@@ -174,12 +175,12 @@ func (b *Boolean) HashKeys() HashKey {
 		value = 0
 	}
 
-	return HashKey{ Type: b.Type(), Value: value }
+	return HashKey{Type: b.Type(), Value: value}
 }
 
 func (i *Integer) HashKey() HashKey {
 	return HashKey{
-		Type: i.Type(),
+		Type:  i.Type(),
 		Value: uint64(i.Value),
 	}
 }
@@ -188,11 +189,11 @@ func (s *String) HashKey() HashKey {
 	h := fnv.New64a()
 	h.Write([]byte(s.Value))
 
-	return HashKey{ Type: s.Type(), Value: h.Sum64() }
+	return HashKey{Type: s.Type(), Value: h.Sum64()}
 }
 
 type HashPair struct {
-	Key Object
+	Key   Object
 	Value Object
 }
 
