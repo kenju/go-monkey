@@ -27,8 +27,12 @@ const (
 
 	LPAREN = "("
 	RPAREN = ")"
+
 	LBRACE = "{"
 	RBRACE = "}"
+
+	LBRACKET = "["
+	RBRACKET = "]"
 
 	STRING = "STRING"
 
