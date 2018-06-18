@@ -12,9 +12,12 @@ run: build
 
 ## Setup
 setup:
+	# install deps
 	go get github.com/golang/lint/golint
 	go get golang.org/x/tools/cmd/goimports
 	go get github.com/Songmu/make2help/cmd/make2help
+	# setup githooks
+	ln -s -f ./.githooks/pre-commit .git/hooks/pre-commit
 
 ## Run tests
 test: setup
