@@ -1,8 +1,9 @@
 package evaluator
 
 import (
-	"github.com/kenju/go-monkey/object"
 	"fmt"
+
+	"github.com/kenju/go-monkey/object"
 )
 
 var builtins = map[string]*object.Builtin{
