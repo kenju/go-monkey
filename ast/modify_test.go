@@ -113,6 +113,10 @@ func TestModify(t *testing.T) {
 				},
 			},
 		},
+		{
+			&ArrayLiteral{Elements: []Expression{one(), one()}},
+			&ArrayLiteral{Elements: []Expression{two(), two()}},
+		},
 	}
 
 	for _, tt := range tests {
