@@ -13,5 +13,6 @@ func Modify(node Node, modifier ModifierFunc) Node {
 		node.Expression, _ = Modify(node.Expression, modifier).(Expression)
 	}
 
+	// calls the modifier with the given Node and **returns** the result
 	return modifier(node)
 }
