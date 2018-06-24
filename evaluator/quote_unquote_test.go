@@ -15,6 +15,18 @@ func TestQuote(t *testing.T) {
 			`quote(5)`,
 			`5`,
 		},
+		{
+			`quote(5 + 8)`,
+			`(5 + 8)`,
+		},
+		{
+			`quote(foobar)`,
+			`foobar`,
+		},
+		{
+			`quote(foobar + barfoo)`,
+			`(foobar + barfoo)`,
+		},
 	}
 
 	for _, tt := range tests {
