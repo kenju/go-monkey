@@ -3,10 +3,55 @@ package evaluator
 import (
 	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/object"
+	"github.com/kenju/go-monkey/token"
+	"fmt"
 )
 
-func quote(node ast.Node) object.Object {
+func quote(node ast.Node, env *object.Environment) object.Object {
 	return &object.Quote{
-		Node: node,
+		Node: evalUnquoteCalls(node, env),
+	}
+}
+
+func evalUnquoteCalls(quoted ast.Node, env *object.Environment) ast.Node {
+	return ast.Modify(quoted, func(node ast.Node) ast.Node {
+		if !isUnquoteCall(node) {
+			return node
+		}
+
+		call, ok := node.(*ast.CallExpression)
+		if !ok {
+			return node
+		}
+
+		if len(call.Arguments) != 1 {
+			return node
+		}
+
+		unquoted := Eval(call.Arguments[0], env)
+		return convertObjectToASTNode(unquoted)
+	})
+}
+
+func isUnquoteCall(node ast.Node) bool {
+	callExpression, ok := node.(*ast.CallExpression)
+	if !ok {
+		return false
+	}
+
+	return callExpression.Function.TokenLiteral() == "unquote"
+}
+
+func convertObjectToASTNode(obj object.Object) ast.Node {
+	switch obj := obj.(type) {
+	case *object.Integer:
+		t := token.Token{
+			Type: token.INT,
+			Literal: fmt.Sprintf("%d", obj.Value),
+		}
+		return &ast.IntegerLiteral{Token: t, Value: obj.Value}
+
+	default:
+		return nil
 	}
 }
