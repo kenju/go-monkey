@@ -18,6 +18,10 @@ func Modify(node Node, modifier ModifierFunc) Node {
 
 	case *PrefixExpression:
 		node.Right, _ = Modify(node.Right, modifier).(Expression)
+
+	case *IndexExpression:
+		node.Left, _ = Modify(node.Left, modifier).(Expression)
+		node.Index, _ = Modify(node.Index, modifier).(Expression)
 	}
 
 	// calls the modifier with the given Node and **returns** the result
