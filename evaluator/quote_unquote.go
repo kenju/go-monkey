@@ -1,8 +1,8 @@
 package evaluator
 
 import (
-	"github.com/kenju/go-monkey/object"
 	"github.com/kenju/go-monkey/ast"
+	"github.com/kenju/go-monkey/object"
 )
 
 func quote(node ast.Node) object.Object {
