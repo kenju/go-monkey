@@ -24,7 +24,7 @@ test: setup
 	go test -v ./...
 
 ## Run tests (without verbose)
-t:
+t: fmt
 	go test ./...
 
 ## Lint

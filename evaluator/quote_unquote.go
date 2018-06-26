@@ -1,10 +1,11 @@
 package evaluator
 
 import (
+	"fmt"
+
 	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/object"
 	"github.com/kenju/go-monkey/token"
-	"fmt"
 )
 
 func quote(node ast.Node, env *object.Environment) object.Object {
@@ -46,10 +47,19 @@ func convertObjectToASTNode(obj object.Object) ast.Node {
 	switch obj := obj.(type) {
 	case *object.Integer:
 		t := token.Token{
-			Type: token.INT,
+			Type:    token.INT,
 			Literal: fmt.Sprintf("%d", obj.Value),
 		}
 		return &ast.IntegerLiteral{Token: t, Value: obj.Value}
+
+	case *object.Boolean:
+		var t token.Token
+		if obj.Value {
+			t = token.Token{Type: token.TRUE, Literal: "true"}
+		} else {
+			t = token.Token{Type: token.FALSE, Literal: "false"}
+		}
+		return &ast.Boolean{Token: t, Value: obj.Value}
 
 	default:
 		return nil
