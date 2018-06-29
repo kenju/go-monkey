@@ -6,6 +6,6 @@ https://interpreterbook.com/
 
 # Development
 
-```
+```bash
 $ make help
 ```
