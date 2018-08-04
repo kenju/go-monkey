@@ -22,12 +22,12 @@ setup:
 ## Run tests
 test: setup
 	go test -v ./...
-	echo $?
+	echo $$?
 
 ## Run test with minimum options
 t:
 	go test ./...
-	echo $?
+	echo $$?
 
 ## Lint
 lint: setup
