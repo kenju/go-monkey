@@ -5,19 +5,16 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/kenju/go-monkey/evaluator"
 	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/object"
 	"github.com/kenju/go-monkey/parser"
+	"github.com/kenju/go-monkey/compiler"
+	"github.com/kenju/go-monkey/vm"
 )
 
 const PROMPT = ">> "
 
 func Start(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
-
-	env := object.NewEnvironment()
-	macroEnv := object.NewEnvironment()
 
 	for {
 		fmt.Printf(PROMPT)
@@ -36,15 +33,22 @@ func Start(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		// expand macros
-		evaluator.DefineMacros(program, macroEnv)
-		expanded := evaluator.ExpandMacros(program, macroEnv)
-
-		evaluated := evaluator.Eval(expanded, env)
-		if evaluated != nil {
-			io.WriteString(out, evaluated.Inspect())
-			io.WriteString(out, "\n")
+		comp := compiler.New()
+		err := comp.Compile(program)
+		if err != nil {
+			fmt.Fprintf(out, "Woops! Compilation failed:\n %s\n", err)
+			continue
 		}
+
+		machine := vm.New(comp.Bytecode())
+		err = machine.Run()
+		if err != nil {
+			fmt.Fprintf(out, "Woops! Executing bytecode failed:\n %s\n", err)
+		}
+
+		stackTop := machine.StackTop()
+		io.WriteString(out, stackTop.Inspect())
+		io.WriteString(out, "\n")
 	}
 }
 
