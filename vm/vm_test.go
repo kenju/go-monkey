@@ -1,13 +1,14 @@
 package vm
 
 import (
-	"github.com/kenju/go-monkey/ast"
-	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/parser"
-	"github.com/kenju/go-monkey/object"
 	"fmt"
 	"testing"
+
+	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/compiler"
+	"github.com/kenju/go-monkey/lexer"
+	"github.com/kenju/go-monkey/object"
+	"github.com/kenju/go-monkey/parser"
 )
 
 func TestIntegerArithmetic(t *testing.T) {
@@ -41,7 +42,7 @@ func testIntegerObject(expected int64, actual object.Object) error {
 }
 
 type vmTestCase struct {
-	input string
+	input    string
 	expected interface{}
 }
 

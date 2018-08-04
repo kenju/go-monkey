@@ -1,10 +1,11 @@
 package compiler
 
 import (
+	"fmt"
+
 	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/code"
 	"github.com/kenju/go-monkey/object"
-	"fmt"
 )
 
 type Compiler struct {
