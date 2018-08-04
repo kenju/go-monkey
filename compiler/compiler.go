@@ -1,20 +1,20 @@
 package compiler
 
 import (
+	"github.com/kenju/go-monkey/ast"
 	"github.com/kenju/go-monkey/code"
 	"github.com/kenju/go-monkey/object"
-	"github.com/kenju/go-monkey/ast"
 )
 
 type Compiler struct {
 	instructions code.Instructions
-	constants []object.Object
+	constants    []object.Object
 }
 
 func New() *Compiler {
 	return &Compiler{
 		instructions: code.Instructions{},
-		constants: []object.Object{},
+		constants:    []object.Object{},
 	}
 }
 
@@ -30,7 +30,7 @@ func (c *Compiler) Compile(node ast.Node) error {
 
 	case *ast.ExpressionStatement:
 		err := c.Compile(node.Expression)
-		if err  != nil {
+		if err != nil {
 			return err
 		}
 
@@ -73,12 +73,12 @@ func (c *Compiler) addInstruction(ins []byte) int {
 func (c *Compiler) Bytecode() *Bytecode {
 	return &Bytecode{
 		Instructions: c.instructions,
-		Constants: c.constants,
+		Constants:    c.constants,
 	}
 }
 
 // Bytecode is what we'll pass to the VM
 type Bytecode struct {
 	Instructions code.Instructions
-	Constants []object.Object
+	Constants    []object.Object
 }

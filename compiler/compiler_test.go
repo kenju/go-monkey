@@ -1,25 +1,26 @@
 package compiler
 
 import (
-	"github.com/kenju/go-monkey/code"
-	"testing"
-	"github.com/kenju/go-monkey/ast"
-	"github.com/kenju/go-monkey/lexer"
-	"github.com/kenju/go-monkey/parser"
 	"fmt"
+	"testing"
+
+	"github.com/kenju/go-monkey/ast"
+	"github.com/kenju/go-monkey/code"
+	"github.com/kenju/go-monkey/lexer"
 	"github.com/kenju/go-monkey/object"
+	"github.com/kenju/go-monkey/parser"
 )
 
 type compilerTestCase struct {
-	input string
-	expectedConstants []interface{}
+	input                string
+	expectedConstants    []interface{}
 	expectedInstructions []code.Instructions
 }
 
 func TestIntegerArthmetic(t *testing.T) {
 	tests := []compilerTestCase{
 		{
-			input: "1 + 2",
+			input:             "1 + 2",
 			expectedConstants: []interface{}{1, 2},
 			expectedInstructions: []code.Instructions{
 				code.Make(code.OpConstant, 0),
@@ -119,4 +120,3 @@ func testIntegerObject(expected int64, actual object.Object) error {
 
 	return nil
 }
-

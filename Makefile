@@ -4,7 +4,7 @@ REVISION := $(shell git rev-parse --short HEAD)
 LDFLAGS := -X 'main.version=$(VERSION)' \
 	-X 'main.revision=$(REVISION)'
 
-packages := ast evaluator lexer main.go parser repl token object
+packages := ast evaluator lexer main.go parser repl token object code compiler vm
 
 ## Build binaries and run
 run: build

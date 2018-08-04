@@ -6,7 +6,7 @@ import (
 
 func TestMake(t *testing.T) {
 	tests := []struct {
-		op Opcode
+		op       Opcode
 		operands []int
 		expected []byte
 	}{
@@ -57,8 +57,8 @@ func TestInstructionsString(t *testing.T) {
 
 func TestReadOperands(t *testing.T) {
 	tests := []struct {
-		op Opcode
-		operands []int
+		op        Opcode
+		operands  []int
 		bytesRead int
 	}{
 		{OpConstant, []int{65535}, 2},

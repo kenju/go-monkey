@@ -1,9 +1,9 @@
 package code
 
 import (
-	"fmt"
-	"encoding/binary"
 	"bytes"
+	"encoding/binary"
+	"fmt"
 )
 
 const (
@@ -15,7 +15,7 @@ type Instructions []byte
 type Opcode byte
 
 type Definition struct {
-	Name string
+	Name          string
 	OperandWidths []int
 }
 
