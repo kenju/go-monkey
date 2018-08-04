@@ -27,3 +27,6 @@ func Lookup(op byte) (*Definition, error) {
 
 	return def, nil
 }
+
+func Make() {
+}
