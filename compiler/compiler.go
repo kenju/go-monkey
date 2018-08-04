@@ -29,6 +29,7 @@ func (c *Compiler) Bytecode() *Bytecode {
 	}
 }
 
+// Bytecode is what we'll pass to the VM
 type Bytecode struct {
 	Instructions code.Instructions
 	Constants []object.Object
