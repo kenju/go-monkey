@@ -26,7 +26,7 @@ test: setup
 
 ## Run test with minimum options
 t:
-	go test -v ./...
+	go test ./...
 	echo $?
 
 ## Lint
