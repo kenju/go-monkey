@@ -24,6 +24,11 @@ test: setup
 	go test -v ./...
 	echo $?
 
+## Run test with minimum options
+t:
+	go test -v ./...
+	echo $?
+
 ## Lint
 lint: setup
 	go vet $(go list)
