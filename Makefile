@@ -22,10 +22,7 @@ setup:
 ## Run tests
 test: setup
 	go test -v ./...
-
-## Run tests (without verbose)
-t: fmt
-	go test ./...
+	echo $?
 
 ## Lint
 lint: setup

@@ -8,7 +8,12 @@ func TestMake(t *testing.T) {
 		operands []int
 		expected []byte
 	}{
-		{OpConstant, []int{65534}, []byte{byte(OpConstant), 255, 254}},
+		// 65534 = 0xFF OxFE
+		{
+			OpConstant,
+			[]int{65534},
+			[]byte{byte(OpConstant), 255, 254}, // the big endian encoding of 65534
+		},
 	}
 
 	for _, tt := range tests {
