@@ -15,6 +15,9 @@ const (
 	OpDiv
 	OpTrue
 	OpFalse
+	OpEqual
+	OpNotEqual
+	OpGreaterThan
 )
 
 var definitions = map[Opcode]*Definition{
@@ -26,6 +29,9 @@ var definitions = map[Opcode]*Definition{
 	OpDiv: {"OpDiv", []int{}},
 	OpTrue: {"OpTrue", []int{}},
 	OpFalse: {"OpFalse", []int{}},
+	OpEqual: {"OpEqual", []int{}},
+	OpNotEqual: {"OpNotEqual", []int{}},
+	OpGreaterThan: {"OpGreaterThan", []int{}},
 }
 
 type Instructions []byte
