@@ -87,7 +87,7 @@ func (c *Compiler) Compile(node ast.Node) error {
 			return err
 		}
 
-		switch node.Operator{
+		switch node.Operator {
 		case "!":
 			c.emit(code.OpBang)
 		case "-":

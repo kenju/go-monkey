@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/kenju/go-monkey/compiler"
 	"github.com/kenju/go-monkey/lexer"
 	"github.com/kenju/go-monkey/parser"
-	"github.com/kenju/go-monkey/compiler"
 	"github.com/kenju/go-monkey/vm"
 )
 
